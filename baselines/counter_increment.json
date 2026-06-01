@@ -1,0 +1,9 @@
+{
+  "program": "counter",
+  "instruction": "increment",
+  "commit": "a3f9c2d",
+  "cu_consumed": 3892,
+  "threshold_pct": 5.0,
+  "timestamp": "2025-06-01T10:23:11Z",
+  "anchor_version": "0.31.0"
+}

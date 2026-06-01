@@ -1,0 +1,9 @@
+{
+  "program": "counter",
+  "instruction": "dummy",
+  "commit": "unknown",
+  "cu_consumed": 3847,
+  "threshold_pct": 5.0,
+  "timestamp": "2026-06-01T23:15:21.651324149+00:00",
+  "anchor_version": "0.31.0"
+}
