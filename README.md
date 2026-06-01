@@ -18,9 +18,9 @@ Deterministic CU baseline tracking for Anchor programs.
 ## What this is
 
 A Rust CLI that measures Compute Unit consumption of Anchor
-programs in a deterministic LiteSVM environment. The idea is
-to catch real CU regressions in CI while ignoring noise from
-framework updates.
+programs in a deterministic LiteSVM environment. It catches
+real CU regressions in CI while ignoring noise from framework
+updates.
 
 ## Why I built this
 
@@ -63,24 +63,23 @@ runs on the same commit always produce the same CU. The tool
 measures *relative deltas* between commits, not absolute values.
 
 Threshold is configurable (default 5%). If the delta exceeds the
-threshold, the CI step fails — otherwise it passes even if the
-absolute CU changed due to framework updates.
+threshold, CI fails — otherwise it passes even if the absolute
+CU changed due to framework updates.
 
 ## Project status
 
-**V1 (current):**
-- [x] CLI skeleton with measure, compare, recalibrate
+**Done:**
+- [x] CLI: measure, compare, recalibrate (clap derive)
 - [x] Baseline save/load with JSON
-- [x] Percentage-based threshold comparison
+- [x] Percentage-based threshold + exit codes
 - [x] Append-only calibration log
 - [x] Unit tests + scratch tests
-- [ ] Real LiteSVM integration (stub CU = 3847 for now)
-- [ ] CI workflow YAML
+- [x] CI workflow (self-dogfooding)
 
-**V2 (planned):**
-- Mainnet state forking via RPC for production-accurate profiling
-- Multiple instruction baselines per program
-- GitHub Action published on marketplace
+**Next:**
+- [ ] Real LiteSVM integration (stub CU = 3847 for now)
+- [ ] Mainnet state forking via RPC (V2)
+- [ ] GitHub Action published on marketplace
 
 ## Files
 anchor-cg/
@@ -95,7 +94,9 @@ anchor-cg/
 ├── baselines/ # Saved CU snapshots (*.json)
 ├── CALIBRATION_LOG.md # Append-only calibration history
 ├── notes.md # Developer scratch pad
-└── ARCHITECTURE.md # Technical details
+├── ARCHITECTURE.md # Technical details
+└── docs/
+└── V2_ROADMAP.md # Mainnet forking plans
 
 text
 
@@ -106,11 +107,5 @@ cargo build --release
 cargo test
 cargo run --release -- measure --program counter --instruction increment
 cargo run --release -- compare --program counter
-Grant Milestones
-text
- M1 ($2,000)     Working CLI + real LiteSVM integration
- ├─ M2 ($1,500)   CI integration + recalibrate improvements
- └─ M3 ($1,500)   GitHub Action + V2 RFC spec
-                              Total: $5,000
 License
 MIT
